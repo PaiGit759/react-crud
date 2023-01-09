@@ -18,61 +18,68 @@ import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
 
-// import AuthVerify from "./common/auth-verify";
-import EventBus from "./common/EventBus";
 
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.logOut = this.logOut.bind(this);
 
-    this.state = {
-      showModeratorBoard: false,
-      showAdminBoard: false,
-      currentUser: undefined,
-    };
-  }
+//
 
-  componentDidMount() {
-    const user = AuthService.getCurrentUser();
+constructor(props) {
+  super(props);
+  this.logOut = this.logOut.bind(this);
 
-    if (user) {
-      this.setState({
-        currentUser: user,
-        showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
-        showAdminBoard: user.roles.includes("ROLE_ADMIN"),
-      });
-    }
+  this.state = {
+    showModeratorBoard: false,
+    showAdminBoard: false,
+    currentUser: undefined,
+  };
+}
 
-    EventBus.on("logout", () => {
-      this.logOut();
-    });
-  }
+componentDidMount() {
+  const user = AuthService.getCurrentUser();
 
-  componentWillUnmount() {
-    EventBus.remove("logout");
-  }
-
-  logOut() {
-    AuthService.logout();
+  if (user) {
     this.setState({
-      showModeratorBoard: false,
-      showAdminBoard: false,
-      currentUser: undefined,
+      currentUser: user,
+      showModeratorBoard: user.roles.includes("ROLE_MODERATOR"),
+      showAdminBoard: user.roles.includes("ROLE_ADMIN"),
     });
   }
+}
+
+logOut() {
+  AuthService.logout();
+  this.setState({
+    showModeratorBoard: false,
+    showAdminBoard: false,
+    currentUser: undefined,
+  });
+}
+
+//
 
   render() {
-    const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+//
+const { currentUser, showModeratorBoard, showAdminBoard } = this.state;
+//
+
 
     return (
       <div>
         <nav className="navbar navbar-expand navbar-dark bg-dark">
+          <Link to={"/tutorials"} className="navbar-brand">
+            Home
+          </Link>
+
 
           <div className="navbar-nav mr-auto">
             <li className="nav-item">
-              <Link to={"/home"} className="nav-link">
-                Home
+              <Link to={"/tutorials"} className="nav-link">
+                Goods
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link to={"/add"} className="nav-link">
+                Add
               </Link>
             </li>
 
@@ -85,19 +92,11 @@ class App extends Component {
             )}
 
             {showAdminBoard && (
-              <div className="navbar-nav ml-auto">
-                <li className="nav-item">
-                  <Link to={"/admin"} className="nav-link">
-                    Admin Board
-                  </Link>
-                </li>
-
-                <li className="nav-item">
-                  <Link to={"/add"} className="nav-link">
-                    Add
-                  </Link>
-                </li>
-              </div>
+              <li className="nav-item">
+                <Link to={"/admin"} className="nav-link">
+                  Admin Board
+                </Link>
+              </li>
             )}
 
             {currentUser && (
@@ -109,7 +108,8 @@ class App extends Component {
             )}
           </div>
 
-          {currentUser ? (
+
+{currentUser ? (
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/profile"} className="nav-link">
@@ -126,7 +126,7 @@ class App extends Component {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/login"} className="nav-link">
-                  Login*****
+                  Login
                 </Link>
               </li>
 
@@ -137,12 +137,18 @@ class App extends Component {
               </li>
             </div>
           )}
+
+
         </nav>
 
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<TutorialsList />} />
-            <Route path="/home" element={<TutorialsList />} />
+            <Route path="/tutorials" element={<TutorialsList />} />
+            <Route path="/add" element={<AddTutorial />} />
+            <Route path="/tutorials/:id" element={<Tutorial />} />
+
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
@@ -150,12 +156,10 @@ class App extends Component {
             <Route path="/mod" element={<BoardModerator />} />
             <Route path="/admin" element={<BoardAdmin />} />
 
-            <Route path="/add" element={<AddTutorial />} />
-
           </Routes>
         </div>
 
-        {/* <AuthVerify logOut={this.logOut}/> */}
+        
       </div>
     );
   }
