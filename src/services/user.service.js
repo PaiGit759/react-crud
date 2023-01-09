@@ -1,7 +1,10 @@
 import axios from 'axios';
 import authHeader from './auth-header';
 
-const API_URL = 'http://localhost:8080/api/test/';
+//const API_URL = 'http://localhost:8080/api/test/';
+const API_URL = 'https://practice-online-store-1-production.up.railway.app/api/test/';
+
+//https://practice-online-store-1-production.up.railway.app/api/auth/
 
 class UserService {
   getPublicContent() {

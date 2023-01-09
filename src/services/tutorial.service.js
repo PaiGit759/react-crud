@@ -2,7 +2,10 @@ import http from "../http-common";
 
 class TutorialDataService {
   getAll() {
-    return http.get("/tutorials");
+//    console.log(http.get("/tutorials"));
+   // return http.get("/tutorials");
+    return http.get("https://practice-online-store-1-production.up.railway.app/api/tutorials");
+    //https://practice-online-store-1-production.up.railway.app/api/tutorials?title=5
   }
 
   get(id) {
