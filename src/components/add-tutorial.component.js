@@ -102,7 +102,7 @@ export default class AddTutorial extends Component {
           submitted: true,
         });
         //console.log(response.data.id);
-        //console.log(response.data);
+        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);

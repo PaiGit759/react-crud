@@ -117,7 +117,7 @@ class App extends Component {
                 </Link>
               </li>
               <li className="nav-item">
-                <a href="/login" className="nav-link" onClick={this.logOut}>
+                <a href="/#/login" className="nav-link" onClick={this.logOut}>
                   LogOut
                 </a>
               </li>
@@ -151,6 +151,8 @@ class App extends Component {
             <Route path="/admin" element={<BoardAdmin />} />
 
             <Route path="/add" element={<AddTutorial />} />
+
+            <Route path="/tutorials/:id" element={<Tutorial/>} />
 
           </Routes>
         </div>

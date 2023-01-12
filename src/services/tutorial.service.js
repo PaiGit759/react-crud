@@ -3,8 +3,8 @@ import http from "../http-common";
 class TutorialDataService {
   getAll() {
 //    console.log(http.get("/tutorials"));
-   // return http.get("/tutorials");
-    return http.get("https://practice-online-store-1-production.up.railway.app/api/tutorials");
+   return http.get("/tutorials");
+    // return http.get("https://practice-online-store-1-production.up.railway.app/api/tutorials");
     //https://practice-online-store-1-production.up.railway.app/api/tutorials?title=5
   }
 
@@ -15,7 +15,9 @@ class TutorialDataService {
   }
 
   create(data) {
-    return http.post("/tutorials", data);
+  //    console.log(http.post("/tutorials", data));
+   return http.post("/tutorials", data);
+    // return http.post("https://practice-online-store-1-production.up.railway.app/api/tutorials", data);
   }
 
   update(id, data) {

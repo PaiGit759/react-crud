@@ -1,7 +1,6 @@
 import axios from "axios";
 
-//const API_URL = "http://localhost:8080/api/auth/";
-const API_URL = "https://practice-online-store-1-production.up.railway.app/api/auth/";
+const API_URL = process.env.REACT_APP_AUTH 
 
 //https://practice-online-store-1-production.up.railway.app/api/auth/
 
