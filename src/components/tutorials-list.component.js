@@ -32,7 +32,7 @@ export default class TutorialsList extends Component {
       showModeratorBoard: false,
       showAdminBoard: false,
       currentUser: undefined,
-      quantity : 1,
+      quantity: 1,
     };
   }
 
@@ -245,8 +245,8 @@ export default class TutorialsList extends Component {
                         className="form-control"
                         id="quantity"
                         value={this.state.quantity}
-                onChange={this.onChangeQuantity}
-                        
+                        onChange={this.onChangeQuantity}
+
                         name="quantity"
                       />
 

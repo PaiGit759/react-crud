@@ -69,6 +69,7 @@ export default class AddTutorial extends Component {
     });
   }
 
+
   saveTutorial(event) {
     event.preventDefault();
 
@@ -162,7 +163,7 @@ export default class AddTutorial extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Price</label>
+              <label htmlFor="price">Price</label>
               <input
                 type="number"
                 className="form-control"
@@ -175,7 +176,7 @@ export default class AddTutorial extends Component {
             </div>
 
             <div className="form-group">
-              <label htmlFor="description">Discount</label>
+              <label htmlFor="discount">Discount</label>
               <input
                 type="number"
                 className="form-control"
@@ -183,7 +184,7 @@ export default class AddTutorial extends Component {
                 required
                 value={this.state.discount}
                 onChange={this.onChangeDiscount}
-                name="price"
+                name="discount"
               />
             </div>
 

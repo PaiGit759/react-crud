@@ -14,15 +14,34 @@ class Tutorial extends Component {
     this.updateTutorial = this.updateTutorial.bind(this);
     this.deleteTutorial = this.deleteTutorial.bind(this);
 
+    this.onChangePrice = this.onChangePrice.bind(this);
+    this.onChangeDiscount = this.onChangeDiscount.bind(this);
+
+    this.onFileChange = this.onFileChange.bind(this);
+
     this.state = {
       currentTutorial: {
         id: null,
         title: "",
         description: "",
         published: false,
+        img: "",
+        discount: 0,
+        price: 0,
+
       },
       message: "",
     };
+  }
+
+
+  async readFileAsDataURL(file) {
+    let result_base64 = await new Promise((resolve) => {
+        let fileReader = new FileReader();
+        fileReader.onload = (e) => resolve(fileReader.result);
+        fileReader.readAsDataURL(file);
+    });
+    return result_base64;
   }
 
   componentDidMount() {
@@ -51,17 +70,49 @@ class Tutorial extends Component {
         description: description,
       },
     }));
-
-  //  console.log(description)
   }
 
+  onChangePrice(e) {
+    const price = e.target.value;
+
+    this.setState((prevState) => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        price: price,
+      },
+    }));
+  }
+
+  onChangeDiscount(e) {
+    const discount = e.target.value;
+
+    this.setState((prevState) => ({
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        discount: discount,
+      },
+    }));
+  }
+
+ onFileChange(e) {
+
+this.readFileAsDataURL(e.target.files[0]).then(img => {
+  this.setState((prevState) => ({    
+      currentTutorial: {
+        ...prevState.currentTutorial,
+        img: img,
+      },
+    }));   
+   });
+  }
+  
   getTutorial(id) {
     TutorialDataService.get(id)
       .then((response) => {
         this.setState({
           currentTutorial: response.data,
         });
-        console.log(response.data);
+        //        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -97,7 +148,7 @@ class Tutorial extends Component {
       this.state.currentTutorial
     )
       .then((response) => {
-        console.log(response.data);
+        //        console.log(response.data);
         this.setState({
           message: "The tutorial was updated successfully!",
         });
@@ -147,6 +198,46 @@ class Tutorial extends Component {
                   onChange={this.onChangeDescription}
                 />
               </div>
+
+              <div className="form-group">
+                <label htmlFor="price">Price</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="price"
+                  required
+                  value={currentTutorial.price}
+                  onChange={this.onChangePrice}
+                  name="price"
+                />
+              </div>
+
+              <div className="form-group">
+              <label htmlFor="discount">Discount</label>
+              <input
+                type="number"
+                className="form-control"
+                id="discount"
+                required
+                value={currentTutorial.discount}
+                onChange={this.onChangeDiscount}
+                name="discount"
+              />
+            </div>
+
+            <img src={`${currentTutorial.img}`} className="img2" alt={"*"} />
+
+            <div className="form-group">
+              <label htmlFor="file">file</label>
+              <input
+                type="file"
+                className="form-control"
+                id="file"
+                name="file"
+                onChange={this.onFileChange}
+              />
+            </div>
+
 
               <div className="form-group">
                 <label>
