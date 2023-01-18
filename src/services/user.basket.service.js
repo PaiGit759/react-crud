@@ -13,13 +13,13 @@ class UserBasketDataService {
 
 
   get(id) {
-          console.log("+++++");
+  //        console.log(`+++++${id}`);
     return http.get(`/userbaskets/${id}`);
    
   }
 
   create(data) {
-      console.log("*****&&&&&");
+//      console.log("*****&&&&&");
    return http.post("/userbaskets", data);
   }
 

@@ -74,7 +74,18 @@ export default class BoardUser extends Component {
 
 
   retrieveUserBasket() {
-    userBasketDataService.getAll()
+//    userBasketDataService.getAll()
+
+const user = AuthService.getCurrentUser();
+    
+
+if (user) {
+
+
+
+
+    userBasketDataService.get(user.id)
+    
       .then((response) => {
         this.setState({
           userBaskets: response.data,
@@ -87,7 +98,7 @@ export default class BoardUser extends Component {
       });
   }
 
-
+}
 
 
 
@@ -100,7 +111,7 @@ export default class BoardUser extends Component {
     
 
     if (currentUser) {
-      console.log("99999",currentUser);
+    //  console.log("99999",currentUser);
      
     }
 
