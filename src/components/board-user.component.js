@@ -5,6 +5,7 @@ import EventBus from "../common/EventBus";
 
 import userBasketDataService from "../services/user.basket.service";
 import AuthService from "../services/auth.service";
+import Container from "react-bootstrap/esm/Container";
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -78,11 +79,7 @@ export default class BoardUser extends Component {
 
 const user = AuthService.getCurrentUser();
     
-
 if (user) {
-
-
-
 
     userBasketDataService.get(user.id)
     
@@ -90,7 +87,7 @@ if (user) {
         this.setState({
           userBaskets: response.data,
         });
-        //         console.log("77777",response);
+                 console.log("77777",response.data);
         //         console.log("99999",this.state.userBaskets);
       })
       .catch((e) => {
@@ -100,23 +97,10 @@ if (user) {
 
 }
 
-
-
-
   render() {
 
     const { userBaskets , currentUser } = this.state;
     //  console.log("99999",userBaskets);
-
-    
-
-    if (currentUser) {
-    //  console.log("99999",currentUser);
-     
-    }
-
-
-
 
     return (
       <div className="container">
@@ -127,8 +111,10 @@ if (user) {
         <div>
           {userBaskets &&
             userBaskets.map((userBaskets, index) => (
-              <h3> { userBaskets.user }</h3>
-       
+              <Container>
+              <img src={userBaskets.goods.img} className="img1" alt={"*"} />
+              <h5> { userBaskets.goods.title}  { userBaskets.quantity } </h5>
+              </Container>  
             ))}
       </div>
 

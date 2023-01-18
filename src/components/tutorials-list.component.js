@@ -141,6 +141,12 @@ export default class TutorialsList extends Component {
 
   saveUserBasket(event) {
     event.preventDefault();
+/* 
+    var data = {
+      user: this.state.currentUser.id,
+      quantity: this.state.quantity,
+      goods: this.state.currentTutorial.id,
+    }; */
 
     var data = {
       user: this.state.currentUser.id,
@@ -150,6 +156,9 @@ export default class TutorialsList extends Component {
 
     userBasketDataService.create(data)
       .then((response) => {
+  //      console.log("-----",response.data);
+
+/*         
         this.setState({
           id: response.data.id,
           title: response.data.title,
@@ -162,6 +171,8 @@ export default class TutorialsList extends Component {
 
           submitted: true,
         });
+
+ */
         //console.log(response.data.id);
         //console.log(response.data);
       })
