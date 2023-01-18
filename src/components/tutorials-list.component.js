@@ -1,6 +1,10 @@
 import React, { Component } from "react";
+
 import TutorialDataService from "../services/tutorial.service";
+
 import { Link } from "react-router-dom";
+
+import userBasketDataService from "../services/user.basket.service";
 
 import "./tutorials.css";
 
@@ -24,6 +28,9 @@ export default class TutorialsList extends Component {
 
     this.onChangeQuantity = this.onChangeQuantity.bind(this);
 
+    this.saveUserBasket = this.saveUserBasket.bind(this);
+
+
     this.state = {
       tutorials: [],
       currentTutorial: null,
@@ -39,6 +46,7 @@ export default class TutorialsList extends Component {
   componentDidMount() {
 
     const user = AuthService.getCurrentUser();
+    //  console.log(`+++++${user}`);
 
     if (user) {
       this.setState({
@@ -49,6 +57,8 @@ export default class TutorialsList extends Component {
     }
 
     this.retrieveTutorials();
+   
+
   }
 
   onChangeSearchTitle(e) {
@@ -65,7 +75,7 @@ export default class TutorialsList extends Component {
         this.setState({
           tutorials: response.data,
         });
-        // console.log(response.data);
+//        console.log("11111",response.data); 
       })
       .catch((e) => {
         console.log(e);
@@ -127,6 +137,40 @@ export default class TutorialsList extends Component {
       quantity: e.target.value,
     });
   }
+
+
+  saveUserBasket(event) {
+    event.preventDefault();
+
+    var data = {
+      user: this.state.currentUser.id,
+      quantity: this.state.quantity,
+      goods: this.state.currentTutorial.id,
+    };
+
+    userBasketDataService.create(data)
+      .then((response) => {
+        this.setState({
+          id: response.data.id,
+          title: response.data.title,
+          description: response.data.description,
+          published: response.data.published,
+
+          price: response.data.price,
+          discount: response.data.discount,
+          img: response.data.img,
+
+          submitted: true,
+        });
+        //console.log(response.data.id);
+        //console.log(response.data);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  }
+
+  
 
 
   render() {
@@ -227,16 +271,7 @@ export default class TutorialsList extends Component {
                     )
                   }
 
-
                   {(!showAdminBoard && currentUser) ? (
-
-
-
-
-
-
-
-
                     <div>
 
                       <label htmlFor="description">Quantity of goods</label>
@@ -246,16 +281,27 @@ export default class TutorialsList extends Component {
                         id="quantity"
                         value={this.state.quantity}
                         onChange={this.onChangeQuantity}
-
                         name="quantity"
                       />
 
-                      <Link
 
+
+                      <button
+                       onClick={this.saveUserBasket} className="btn btn-success">
+                      Add to Basket 1
+                      </button>
+
+
+                      <Link
+                        to={"/user/"}
                         className="badge badge-warning"
                       >
-                        Add to Basket
+                        Go to Basket
                       </Link>
+
+
+
+
                     </div>
 
                   ) :
@@ -263,11 +309,7 @@ export default class TutorialsList extends Component {
                       ""
                     )
                   }
-
-
-
                 </Row>
-
 
               </Container>
             ) : (
@@ -277,8 +319,6 @@ export default class TutorialsList extends Component {
               </div>
             )}
           </div>
-
-
 
         </Row>
       </Container>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
-import axios from 'axios';
+//import axios from 'axios';
 
 
 export default class AddTutorial extends Component {
@@ -26,6 +26,9 @@ export default class AddTutorial extends Component {
       published: false,
 
       submitted: false,
+
+
+      
     };
   }
 
@@ -73,13 +76,6 @@ export default class AddTutorial extends Component {
   saveTutorial(event) {
     event.preventDefault();
 
-    // const formData = new FormData();
-    // formData.append('imgfile', this.state.imgfile)
-  //  formData.append('filename', this.state.img)
-
-  //   axios.post("/download", formData, {}).then(res => { console.log(res) })
-
-   // console.log('*****',event);
     var data = {
       title: this.state.title,
       description: this.state.description,

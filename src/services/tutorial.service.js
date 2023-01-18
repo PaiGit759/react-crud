@@ -9,18 +9,18 @@ class TutorialDataService {
   }
 
   get(id) {
-  //  console.log(`/tutorials/${id}*****`)
+//    console.log("&&&&&");
     return http.get(`/tutorials/${id}`);
    
   }
 
   create(data) {
-  //    console.log(http.post("/tutorials", data));
+//      console.log("&&&&&");
    return http.post("/tutorials", data);
-    // return http.post("https://practice-online-store-1-production.up.railway.app/api/tutorials", data);
   }
 
   update(id, data) {
+  //  console.log(`/tutorials/${id}*****`);
     return http.put(`/tutorials/${id}`, data);
   }
 
@@ -35,6 +35,17 @@ class TutorialDataService {
   findByTitle(title) {
     return http.get(`/tutorials?title=${title}`);
   }
+
+
+  createUB(data) {
+    console.log("&&&&&+++++");
+ return http.post("/tutorials", data);
 }
+
+
+}
+
+
+  
 
 export default new TutorialDataService();
