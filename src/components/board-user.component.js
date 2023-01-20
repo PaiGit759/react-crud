@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component , useState  } from "react";
 
 import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
@@ -6,6 +6,26 @@ import EventBus from "../common/EventBus";
 import userBasketDataService from "../services/user.basket.service";
 import AuthService from "../services/auth.service";
 import Container from "react-bootstrap/esm/Container";
+
+
+
+import { AgGridReact } from 'ag-grid-react';
+
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-alpine.css';
+
+/* 
+const [rowData] = [
+  {make: "Toyota", model: "Celica", price: 35000},
+  {make: "Ford", model: "Mondeo", price: 32000},
+  {make: "Porsche", model: "Boxster", price: 72000}
+];
+
+const [columnDefs] = [
+  { field: 'make' },
+  { field: 'model' },
+  { field: 'price' }
+]; */
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -20,6 +40,9 @@ export default class BoardUser extends Component {
       currentIndex: -1,
       currentUser: undefined,
 
+      columnDefs : [],
+      rowData : [],
+
       content: ""
     };
   }
@@ -32,6 +55,22 @@ export default class BoardUser extends Component {
     if (user) {
       this.setState({
         currentUser: user,
+
+        columnDefs : 
+        [
+          { field: 'make' },
+        { field: 'model' },
+        { field: 'price' }
+      ],
+        rowData : 
+        
+        [
+          {make: "Toyota", model: "Celica", price: 35000},
+          {make: "Ford", model: "Mondeo", price: 32000},
+          {make: "Porsche", model: "Boxster", price: 72000}
+        ]
+        
+        ,    
 
       });
     }
@@ -87,7 +126,7 @@ if (user) {
         this.setState({
           userBaskets: response.data,
         });
-                 console.log("77777",response.data);
+        //         console.log("77777",response.data);
         //         console.log("99999",this.state.userBaskets);
       })
       .catch((e) => {
@@ -99,8 +138,8 @@ if (user) {
 
   render() {
 
-    const { userBaskets , currentUser } = this.state;
-    //  console.log("99999",userBaskets);
+    const { userBaskets , currentUser , rowData , columnDefs } = this.state;
+//      console.log("99999",rowData);
 
     return (
       <div className="container">
@@ -118,13 +157,18 @@ if (user) {
             ))}
       </div>
 
+
+
+      <div className="ag-theme-alpine" style={{height: 300, width: 600}}>
+           < AgGridReact
+               rowData={rowData}
+               columnDefs={columnDefs}
+           />
+       </div>
+
+
+
       </div >
-
-
-
-
-
-
     );
   }
 }
