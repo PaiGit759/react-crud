@@ -50,6 +50,10 @@ export default class BoardUser extends Component {
   componentDidMount() {
 
     const user = AuthService.getCurrentUser();
+  
+    function getPrise(params) {
+      return params.price * params.discount / 100;
+    }  
     
 
     if (user) {
@@ -58,19 +62,24 @@ export default class BoardUser extends Component {
 
         columnDefs : 
         [
-          { field: 'make' },
-        { field: 'model' },
-        { field: 'price' }
-      ],
-        rowData : 
+          {headerName: 'Title', field: 'goods.title' , resizable: true},
+        { headerName: 'Quantity', field: 'quantity', type: 'rightAligned' , width: 100, maxWidth: 100 , resizable: true},
+        { headerName: 'Price', field: 'goods.price', type: 'rightAligned' , width: 100, maxWidth: 200 , resizable: true},
+        { headerName: 'Discount %', field: 'goods.discount', type: 'rightAligned' , width: 120, maxWidth: 200, resizable: true },
+        { headerName: 'Price new', field: 'price_new', valueGetter: 'Math.round(getValue("goods.price") * (1 - (getValue("goods.discount") / 100)))', type: 'rightAligned' , width: 100, maxWidth: 200 , resizable: true},
+        { headerName: 'Amount payable', field: 'amount', valueGetter: 'Math.round(getValue("quantity") * getValue("price_new"))', type: 'rightAligned' , width: 160, maxWidth: 200 , resizable: true},
         
-        [
-          {make: "Toyota", model: "Celica", price: 35000},
+        { headerName: 'Id', field: 'goods.id', hide : true },
+        
+      ],
+/*         rowData : 
+        
+        [{make: "Toyota", model: "Celica", price: 35000},
           {make: "Ford", model: "Mondeo", price: 32000},
           {make: "Porsche", model: "Boxster", price: 72000}
         ]
         
-        ,    
+        ,     */
 
       });
     }
@@ -83,10 +92,9 @@ export default class BoardUser extends Component {
     UserService.getUserBoard().then(
       response => {
         this.setState({
-          content: response.data
-        }
+          content: response.data        }
         );
-        //        console.log(response.data);
+//                console.log('!!!!!',rowData);
 
       },
       error => {
@@ -110,9 +118,6 @@ export default class BoardUser extends Component {
 
   }
 
-
-
-
   retrieveUserBasket() {
 //    userBasketDataService.getAll()
 
@@ -125,9 +130,10 @@ if (user) {
       .then((response) => {
         this.setState({
           userBaskets: response.data,
+          rowData : [...response.data] 
         });
         //         console.log("77777",response.data);
-        //         console.log("99999",this.state.userBaskets);
+      //           console.log("99999",rowData);
       })
       .catch((e) => {
         console.log(e);
@@ -139,7 +145,7 @@ if (user) {
   render() {
 
     const { userBaskets , currentUser , rowData , columnDefs } = this.state;
-//      console.log("99999",rowData);
+      console.log("999999999",rowData);
 
     return (
       <div className="container">
@@ -159,8 +165,8 @@ if (user) {
 
 
 
-      <div className="ag-theme-alpine" style={{height: 300, width: 600}}>
-           < AgGridReact
+      <div className="ag-theme-alpine" style={{height: 300, width : 900}} >
+           < AgGridReact rowHeight={'35'}
                rowData={rowData}
                columnDefs={columnDefs}
            />
