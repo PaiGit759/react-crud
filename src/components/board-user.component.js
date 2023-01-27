@@ -16,40 +16,7 @@ import {AgGridColumn, AgGridReact } from 'ag-grid-react';
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
-//import 'ag-grid-community/dist/styles/ag-grid.css';
-//import 'ag-grid-community/dist/styles/ag-theme-alpine.css';
 import 'ag-grid-enterprise';
-
-
-
-import {
-  ColDef,
-  ColGroupDef,
-  FirstDataRenderedEvent,
-  Grid,
-  GridOptions,
-  GridReadyEvent,
-  IDetailCellRendererParams,
-} from '@ag-grid-community/core';
-
-//import { IAccount } from './interfaces';
-
-
-
-/* 
-const [rowData] = [
-  {make: "Toyota", model: "Celica", price: 35000},
-  {make: "Ford", model: "Mondeo", price: 32000},
-  {make: "Porsche", model: "Boxster", price: 72000}
-];
-
-const [columnDefs] = [
-  { field: 'make' },
-  { field: 'model' },
-  { field: 'price' }
-]; */
-
-
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -74,21 +41,8 @@ export default class BoardUser extends Component {
 
   componentDidMount() {
 
-/*     const statusBar = {
-      statusPanels: [
-        {
-          statusPanel: 'agTotalAndFilteredRowCountComponent',
-          align: 'left',
-        }
-      ]
-    }; */
 
     const user = AuthService.getCurrentUser();
-
-/*     function getPrise(params) {
-      return params.price * params.discount / 100;
-    }
- */
 
     if (user) {
       this.setState({
@@ -135,8 +89,6 @@ export default class BoardUser extends Component {
     this.retrieveUserBasket();
     //   console.log(this.state.userBaskets);
 
-
-
     UserService.getUserBoard().then(
       response => {
         this.setState({
@@ -168,8 +120,6 @@ export default class BoardUser extends Component {
   }
 
   retrieveUserBasket() {
-    //    userBasketDataService.getAll()
-
     const user = AuthService.getCurrentUser();
 
     if (user) {

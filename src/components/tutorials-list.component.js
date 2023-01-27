@@ -299,7 +299,7 @@ export default class TutorialsList extends Component {
 
                       <button
                        onClick={this.saveUserBasket} className="btn btn-success">
-                      Add to Basket 1
+                      Add to Basket
                       </button>
 
 

@@ -9,7 +9,7 @@ class TutorialDataService {
   }
 
   get(id) {
-//    console.log("&&&&&");
+  //  console.log("&&&&&");
     return http.get(`/tutorials/${id}`);
    
   }
@@ -38,14 +38,10 @@ class TutorialDataService {
 
 
   createUB(data) {
-    console.log("&&&&&+++++");
+//    console.log("&&&&&+++++");
  return http.post("/tutorials", data);
 }
 
-
 }
-
-
-  
 
 export default new TutorialDataService();

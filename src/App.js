@@ -7,6 +7,7 @@ import AddTutorial from "./components/add-tutorial.component";
 import Tutorial from "./components/tutorial.component";
 import TutorialsList from "./components/tutorials-list.component";
 
+import UsersOrder from "./components/users-order.component";
 
 import AuthService from "./services/auth.service";
 
@@ -153,6 +154,8 @@ class App extends Component {
             <Route path="/add" element={<AddTutorial />} />
 
             <Route path="/tutorials/:id" element={<Tutorial/>} />
+
+            <Route path="/addorder" element={<UsersOrder/>} />
 
           </Routes>
         </div>
