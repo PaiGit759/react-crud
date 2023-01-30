@@ -8,9 +8,9 @@ class TutorialDataService {
     //https://practice-online-store-1-production.up.railway.app/api/tutorials?title=5
   }
 
-  get(id) {
+  get(id,data) {
   //  console.log("&&&&&");
-    return http.get(`/tutorials/${id}`);
+    return http.get(`/tutorials/${id}`,data);
    
   }
 

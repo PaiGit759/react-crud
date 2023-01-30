@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 import { withRouter } from "../common/with-router";
 
+import { useLocation } from 'react-router-dom'
+
 //import "./tutorials.css";
 
 class UsersOrder extends Component {
@@ -46,6 +48,17 @@ class UsersOrder extends Component {
 
   componentDidMount() {
 //    this.getTutorial(this.props.router.params.id);
+
+/* const location = useLocation();
+  const { data } = location.state;
+ */
+
+  const prstr = localStorage.getItem('useData');
+  const obj = JSON.parse(prstr);
+     console.log('vvvvv',obj);
+//  console.log('.....',localStorage.getItem('useData'));
+
+
   }
 
   onChangeTitle(e) {
@@ -171,6 +184,7 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
 
   render() {
 //    const { currentTutorial } = this.state;
+//console.log('ggggg',this.props)
     return (
       <div>
         mbnmbmbmbm hubvjh
