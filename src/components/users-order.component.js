@@ -4,33 +4,21 @@ import { withRouter } from "../common/with-router";
 
 import { useLocation } from 'react-router-dom'
 
-//import "./tutorials.css";
+//import "../components/css/users-order.css";
+import "../css/users-order.css";
 
 class UsersOrder extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.getTutorial = this.getTutorial.bind(this);
-    this.updatePublished = this.updatePublished.bind(this);
-    this.updateTutorial = this.updateTutorial.bind(this);
-    this.deleteTutorial = this.deleteTutorial.bind(this);
+    this.onChangeFirstName = this.onChangeFirstName.bind(this);
+    this.onChangeSurname = this.onChangeSurname.bind(this);
 
-    this.onChangePrice = this.onChangePrice.bind(this);
-    this.onChangeDiscount = this.onChangeDiscount.bind(this);
-
-    this.onFileChange = this.onFileChange.bind(this);
 
     this.state = {
-      currentTutorial: {
+      currentOrder: {
         id: null,
-        title: "",
-        description: "",
-        published: false,
-        img: "",
-        discount: 0,
-        price: 0,
-
+        firstname: "",
+        surname: "",
       },
       message: "",
     };
@@ -39,155 +27,116 @@ class UsersOrder extends Component {
 
   async readFileAsDataURL(file) {
     let result_base64 = await new Promise((resolve) => {
-        let fileReader = new FileReader();
-        fileReader.onload = (e) => resolve(fileReader.result);
-        fileReader.readAsDataURL(file);
+      let fileReader = new FileReader();
+      fileReader.onload = (e) => resolve(fileReader.result);
+      fileReader.readAsDataURL(file);
     });
     return result_base64;
   }
 
   componentDidMount() {
-//    this.getTutorial(this.props.router.params.id);
 
-/* const location = useLocation();
-  const { data } = location.state;
- */
 
-  const prstr = localStorage.getItem('useData');
-  const obj = JSON.parse(prstr);
-     console.log('vvvvv',obj);
-//  console.log('.....',localStorage.getItem('useData'));
-
+    const prstr = localStorage.getItem('useData');
+    const obj = JSON.parse(prstr);
+    console.log('vvvvv', obj);
 
   }
 
-  onChangeTitle(e) {
-    const title = e.target.value;
+  onChangeFirstName(e) {
+    const firstname = e.target.value;
 
     this.setState(function (prevState) {
       return {
-        currentTutorial: {
-          ...prevState.currentTutorial,
-          title: title,
+        currentOrder: {
+          ...prevState.currentOrder,
+          firstname: firstname,
         },
       };
     });
   }
 
-  onChangeDescription(e) {
-    const description = e.target.value;
+  onChangeSurname(e) {
+    const surname = e.target.value;
 
-    this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
-        description: description,
-      },
-    }));
-  }
-
-  onChangePrice(e) {
-    const price = e.target.value;
-
-    this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
-        price: price,
-      },
-    }));
-  }
-
-  onChangeDiscount(e) {
-    const discount = e.target.value;
-
-    this.setState((prevState) => ({
-      currentTutorial: {
-        ...prevState.currentTutorial,
-        discount: discount,
-      },
-    }));
-  }
-
- onFileChange(e) {
-
-this.readFileAsDataURL(e.target.files[0]).then(img => {
-  this.setState((prevState) => ({    
-      currentTutorial: {
-        ...prevState.currentTutorial,
-        img: img,
-      },
-    }));   
-   });
-  }
-  
-  getTutorial(id) {
-    TutorialDataService.get(id)
-      .then((response) => {
-        this.setState({
-          currentTutorial: response.data,
-        });
-        //        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  updatePublished(status) {
-    var data = {
-      id: this.state.currentTutorial.id,
-      title: this.state.currentTutorial.title,
-      description: this.state.currentTutorial.description,
-      published: status,
-    };
-
-    TutorialDataService.update(this.state.currentTutorial.id, data)
-      .then((response) => {
-        this.setState((prevState) => ({
-          currentTutorial: {
-            ...prevState.currentTutorial,
-            published: status,
-          },
-        }));
-        console.log(response.data);
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  updateTutorial() {
-    TutorialDataService.update(
-      this.state.currentTutorial.id,
-      this.state.currentTutorial
-    )
-      .then((response) => {
-        //        console.log(response.data);
-        this.setState({
-          message: "The tutorial was updated successfully!",
-        });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  deleteTutorial() {
-    TutorialDataService.delete(this.state.currentTutorial.id)
-      .then((response) => {
-        console.log(response.data);
-        this.props.router.navigate("/tutorials");
-      })
-      .catch((e) => {
-        console.log(e);
-      });
+    this.setState(function (prevState) {
+      return {
+        currentOrder: {
+          ...prevState.currentOrder,
+          surname: surname,
+        },
+      };
+    });
   }
 
   render() {
-//    const { currentTutorial } = this.state;
-//console.log('ggggg',this.props)
+    //    const { currentTutorial } = this.state;
+    //console.log('ggggg',this.props)
     return (
-      <div>
-        mbnmbmbmbm hubvjh
+      <div className="submit-form">
+        <h3> Buyer Order Form </h3>
+
+        <div className="div13">
+
+          <div className="div15">
+            <label htmlFor="title">First Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstname"
+              required
+              value={this.state.firstname}
+              onChange={this.onChangeFirstName}
+              name="firstname"
+            />
+          </div>
+
+          <div className="div14">
+            <label htmlFor="title">Surname</label>
+            <input
+              type="text"
+              className="form-control"
+              id="surname"
+              required
+              value={this.state.surname}
+              onChange={this.onChangeSurname}
+              name="surname"
+            />
+          </div>
+        </div>
+
+
+        <div className="div16">
+
+          <div className="div15">
+            <label >First Name</label>
+            <input
+              type="text"
+              className="form-control"
+              id="firstname"
+              required
+              value={this.state.firstname}
+              onChange={this.onChangeFirstName}
+              name="firstname"
+            />
+          </div>
+
+          <div className="div14">
+            <label htmlFor="title">Surname</label>
+            <input
+              type="text"
+              className="form-control"
+              id="surname"
+              required
+              value={this.state.surname}
+              onChange={this.onChangeSurname}
+              name="surname"
+            />
+          </div>
+        </div>
+
+
+
       </div>
     );
   }

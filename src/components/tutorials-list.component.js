@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 
 import userBasketDataService from "../services/user.basket.service";
 
-import "./tutorials.css";
+
+import "../css/tutorials.css"; //tutorials.css
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
