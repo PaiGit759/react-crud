@@ -7,11 +7,13 @@ import { Link } from "react-router-dom";
 import userBasketDataService from "../services/user.basket.service";
 
 
-import "../css/tutorials.css"; //tutorials.css
+//import "../css/tutorials.css"; //tutorialscompontynt.css 
+import "../css/tutorialscompontynt.css";
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
 
 import AuthService from "../services/auth.service";
 
@@ -58,7 +60,7 @@ export default class TutorialsList extends Component {
     }
 
     this.retrieveTutorials();
-   
+
 
   }
 
@@ -76,7 +78,7 @@ export default class TutorialsList extends Component {
         this.setState({
           tutorials: response.data,
         });
-//        console.log("11111",response.data); 
+        //        console.log("11111",response.data); 
       })
       .catch((e) => {
         console.log(e);
@@ -142,12 +144,6 @@ export default class TutorialsList extends Component {
 
   saveUserBasket(event) {
     event.preventDefault();
-/* 
-    var data = {
-      user: this.state.currentUser.id,
-      quantity: this.state.quantity,
-      goods: this.state.currentTutorial.id,
-    }; */
 
     var data = {
       user: this.state.currentUser.id,
@@ -157,182 +153,200 @@ export default class TutorialsList extends Component {
 
     userBasketDataService.create(data)
       .then((response) => {
-  //      console.log("-----",response.data);
-
-/*         
-        this.setState({
-          id: response.data.id,
-          title: response.data.title,
-          description: response.data.description,
-          published: response.data.published,
-
-          price: response.data.price,
-          discount: response.data.discount,
-          img: response.data.img,
-
-          submitted: true,
-        });
-
- */
-        //console.log(response.data.id);
-        //console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
       });
   }
 
-  
-
-
   render() {
     const { searchTitle, tutorials, currentTutorial, currentIndex, currentUser, showAdminBoard } =
       this.state;
 
     return (
-      <Container>
+      <Container fluid>
+
         <Row>
-          <div className="div3">
 
-            <div className="div1 ">
-              {tutorials &&
-                tutorials.map((tutorial, index) => (
-                  <div
-                    className={"div2"
-                      + (index === currentIndex ? "active" : "")}
-                    onClick={() => this.setActiveTutorial(tutorial, index)}
-                    key={index}
-                  >
-                    <img src={tutorial.img} className="img1" alt={"*"} />
-                    <div>
-                      {tutorial.title}
-                    </div>
 
+          <Col xs={6} sm={7} lg={8}>
+            <div className="div3-ts">
+              < Container fluid>
+                <Row>
+                  <div className="div1-ts ">
+                    {tutorials &&
+                      tutorials.map((tutorial, index) => (
+                        <div
+                          className={"div2-ts"
+                            + (index === currentIndex ? "active" : "")}
+                          onClick={() => this.setActiveTutorial(tutorial, index)}
+                          key={index}
+                        >
+                          <img src={tutorial.img} className="img1-ts" alt={"*"} />
+                          <div className="name-ts">
+                            {tutorial.title}
+                          </div>
+                        </div>
+                      ))}
                   </div>
-                ))}
-            </div>
-          </div>
-
-
-
-          < div className="div4">
-            {currentTutorial ? (
-              <Container>
-
-
-                <Row>
-                  <Col xs={12}>
-                    <h2 id="headerGoods">Goods</h2>
-                  </Col>
                 </Row>
-
-
-                <Row>
-
-                  <Col >
-                    <img src={`${currentTutorial.img}`} className="img2" alt={"*"} />
-                  </Col>
-
-
-
-                  <Col >
-                    <div>
-                      <label>
-                        <strong>Title:</strong>
-                      </label>{" "}
-                      {currentTutorial.title}
-                    </div>
-                    <div>
-                      <label>
-                        <strong>Description:</strong>
-                      </label>{" "}
-                      {currentTutorial.description}
-                    </div>
-                    <div>
-                      <label>
-                        <strong>Price:</strong>
-                      </label>{" "}
-                      {currentTutorial.price}
-                      <span> kr</span>
-                    </div>
-                    <div>
-                      <label>
-                        <strong>Discount:</strong>
-                      </label>{" "}
-                      {currentTutorial.discount}
-                      <span> %</span>
-                    </div>
-                    <div>
-                      <label>
-                        <strong>Status:</strong>
-                      </label>{" "}
-                      {currentTutorial.published ? "Published" : "Pending"}
-                    </div>
-                  </Col>
-
-                  {showAdminBoard ? (
-                    <Link
-                      to={"/tutorials/" + currentTutorial.id}
-                      className="badge badge-warning"
-                    >
-                      Edit
-                    </Link>
-                  ) :
-                    (
-                      ""
-                    )
-                  }
-
-                  {(!showAdminBoard && currentUser) ? (
-                    <div>
-
-                      <label htmlFor="description">Quantity of goods</label>
-                      <input
-                        type="number"
-                        className="form-control"
-                        id="quantity"
-                        value={this.state.quantity}
-                        onChange={this.onChangeQuantity}
-                        name="quantity"
-                      />
-
-
-
-                      <button
-                       onClick={this.saveUserBasket} className="btn btn-success">
-                      Add to Basket
-                      </button>
-
-
-                      <Link
-                        to={"/user/"}
-                        className="badge badge-warning"
-                      >
-                        Go to Basket
-                      </Link>
-
-
-
-
-                    </div>
-
-                  ) :
-                    (
-                      ""
-                    )
-                  }
-                </Row>
-
               </Container>
-            ) : (
-              <div>
-                <br />
-                <p>Please click on a goods...</p>
-              </div>
-            )}
-          </div>
+            </div>
+          </Col>
+
+
+
+          <Col xs={6} sm={5} lg={4}>
+            < div className="div4-ts">
+              {currentTutorial ? (
+                <Container>
+
+                  {/* 
+                  <Row>
+                    <Col xs={12}>
+                      <h2 id="headerGoods">Goods</h2>
+                    </Col>
+                  </Row>
+
+ */}
+                  <Row>
+                    <Col xs={12}>
+                      <div className="title-ts">
+                        {" "}
+                        {currentTutorial.title}
+                      </div>
+                      {/*  <h2 id="headerGoods">Goods</h2>  */}
+                    </Col>
+                  </Row>
+
+
+
+                  <Row>
+
+                    <Col >
+                      <img src={`${currentTutorial.img}`} className="img2-ts" alt={"*"} />
+                    </Col>
+
+                    <Col >
+
+                      {/* 
+                      <div>
+                        <label>
+                          <strong>Title:</strong>
+                        </label>{" "}
+                        {currentTutorial.title}
+                      </div>
+ */}
+
+                      {/* 
+                      <div>
+                        <label>
+                          <strong>Description:</strong>
+                        </label>{" "}
+                        {currentTutorial.description}
+                      </div>
+
+ */}
+
+                      <div className="description-ts">
+                        <label>
+                          <p className="descriptionName-ts">Description:</p>
+                        </label>{" "}
+                        {currentTutorial.description}
+                      </div>
+
+
+                      <div className="description-ts">
+                        <label>
+                          <p className="descriptionName-ts">Price:</p>
+                        </label>{" "}
+                        {currentTutorial.price}
+                        <span> kr</span>
+                      </div>
+
+                      <div className="description-ts">
+                        <label>
+                          <p className="descriptionName-ts">Discount:</p>
+                        </label>{" "}
+                        {currentTutorial.discount}
+                        <span> %</span>
+                      </div>
+
+                    </Col>
+
+                    {showAdminBoard ? (
+                      /* 
+                                            <Link
+                                              to={"/tutorials/" + currentTutorial.id}
+                                              className="badge badge-warning"
+                                            >
+                                              Edit
+                                            </Link>
+                       */
+
+                      <Button variant="primary">
+                        <Link
+                          to={"/tutorials/" + currentTutorial.id}
+                          className="edit-ts"
+                        >
+                          Edit
+                        </Link>
+                      </Button>
+
+                    ) :
+                      (
+                        ""
+                      )
+                    }
+
+                    {(!showAdminBoard && currentUser) ? (
+
+                      <div>
+
+                        <label htmlFor="description">Quantity of goods</label>
+                        <input
+                          type="number"
+                          className="form-control"
+                          id="quantity"
+                          value={this.state.quantity}
+                          onChange={this.onChangeQuantity}
+                          name="quantity"
+                        />
+
+                        <Button
+                          onClick={this.saveUserBasket} className="btn btn-success">
+                          Add to Basket
+                        </Button>
+
+
+                        <Link
+                          to={"/user/"}
+                          className="badge badge-warning"
+                        >
+                          Go to Basket
+                        </Link>
+                      </div>
+
+                    ) :
+                      (
+                        ""
+                      )
+                    }
+                  </Row>
+
+                </Container>
+              ) : (
+                <div>
+                  <br />
+                  <p>Please click on a goods...</p>
+                </div>
+              )}
+            </div>
+          </Col>
+
 
         </Row>
+
       </Container>
     );
   }

@@ -18,6 +18,7 @@ import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
 import BoardAdmin from "./components/board-admin.component";
+import About from "./components/about.component";
 
 // import AuthVerify from "./common/auth-verify";
 import EventBus from "./common/EventBus";
@@ -71,11 +72,13 @@ class App extends Component {
         <nav className="navbar navbar-expand navbar-dark bg-dark">
 
           <div className="navbar-nav mr-auto">
+
             <li className="nav-item">
               <Link to={"/home"} className="nav-link">
                 Home
               </Link>
             </li>
+
 
             {showModeratorBoard && (
               <li className="nav-item">
@@ -108,6 +111,7 @@ class App extends Component {
                 </Link>
               </li>
             )}
+
           </div>
 
           {currentUser ? (
@@ -138,12 +142,24 @@ class App extends Component {
               </li>
             </div>
           )}
+
+          <div className="navbar-nav mr-auto">
+            <li className="nav-item">
+              <Link to={"/about"} className="nav-link">
+                About
+              </Link>
+            </li>
+          </div>
+
         </nav>
 
         <div className="container mt-3">
           <Routes>
             <Route path="/" element={<TutorialsList />} />
             <Route path="/home" element={<TutorialsList />} />
+
+            <Route path="/about" element={<About />} />
+
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
@@ -153,9 +169,9 @@ class App extends Component {
 
             <Route path="/add" element={<AddTutorial />} />
 
-            <Route path="/tutorials/:id" element={<Tutorial/>} />
+            <Route path="/tutorials/:id" element={<Tutorial />} />
 
-            <Route path="/addorder" element={<UsersOrder/>} />
+            <Route path="/addorder" element={<UsersOrder />} />
 
           </Routes>
         </div>

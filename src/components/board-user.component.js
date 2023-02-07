@@ -4,19 +4,24 @@ import UserService from "../services/user.service";
 import EventBus from "../common/EventBus";
 
 import ClickableStatusBarComponent from '../components/clickableStatusBarComponent.tsx'
+import ClickableStatusBarComponentDelete from '../components/clickableStatusBarComponentDelete.tsx'
 
-import userBasketDataService from "../services/user.basket.service"; 
+import userBasketDataService from "../services/user.basket.service";
 import AuthService from "../services/auth.service";
 import Container from "react-bootstrap/esm/Container";
 
 
 
-import {AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridColumn, AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import 'ag-grid-enterprise';
+
+import logo from '../IMG/basket.jpeg'//"./public/basket.jpeg"; react-crud/public/basket.jpeg
+
+
 
 export default class BoardUser extends Component {
   constructor(props) {
@@ -33,7 +38,7 @@ export default class BoardUser extends Component {
 
       columnDefs: [],
       rowData: [],
-      statusBar:undefined,
+      statusBar: undefined,
 
       content: ""
     };
@@ -51,10 +56,10 @@ export default class BoardUser extends Component {
         columnDefs:
           [
             { headerName: 'Title', field: 'goods.title', resizable: true, cellRenderer: 'agGroupCellRenderer' },
-            { headerName: 'Quantity', wrapHeaderText: true, field: 'quantity', type: 'numericColumn', width: 100, maxWidth: 100, resizable: true },
+            { headerName: 'Quantity', wrapHeaderText: true, field: 'quantity', type: 'numericColumn', width: 110, maxWidth: 110, resizable: true },
             { headerName: 'Price', field: 'goods.price', type: 'numericColumn', width: 100, maxWidth: 200, resizable: true },
-            { headerName: 'Discount %', field: 'goods.discount', type: 'numericColumn', width: 120, maxWidth: 200, resizable: true },
-            { headerName: 'Price new', field: 'price_new', valueGetter: 'Math.round(getValue("goods.price") * (1 - (getValue("goods.discount") / 100)))', type: 'numericColumn', width: 100, maxWidth: 200, resizable: true },
+            { headerName: 'Discount %', field: 'goods.discount', type: 'numericColumn', width: 130, maxWidth: 200, resizable: true },
+            { headerName: 'Price new', field: 'price_new', valueGetter: 'Math.round(getValue("goods.price") * (1 - (getValue("goods.discount") / 100)))', type: 'numericColumn', width: 120, maxWidth: 120, resizable: true },
             { headerName: 'Amount payable', wrapHeaderText: true, field: 'amount', valueGetter: 'Math.round(getValue("quantity") * getValue("price_new"))', type: 'numericColumn', width: 160, maxWidth: 200, resizable: true },
 
             { headerName: 'Id', field: 'goods.id', hide: true },
@@ -64,22 +69,24 @@ export default class BoardUser extends Component {
 
         statusBar: {
           statusPanels: [
-   //         { statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left', },
+            //         { statusPanel: 'agTotalAndFilteredRowCountComponent', align: 'left', },
             { statusPanel: 'agTotalRowCountComponent', align: 'left' },
             { statusPanel: 'agFilteredRowCountComponent' },
             { statusPanel: 'agSelectedRowCountComponent' },
-            { statusPanel: 'agAggregationComponent' ,
-            statusPanelParams: {
-              // possible values are: 'count', 'sum', 'min', 'max', 'avg'
-              aggFuncs: ['avg', 'sum']
-          }
-          },
+            {
+              statusPanel: 'agAggregationComponent',
+              statusPanelParams: {
+                // possible values are: 'count', 'sum', 'min', 'max', 'avg'
+                aggFuncs: ['avg', 'sum']
+              }
+            },
+            {
+              statusPanel: ClickableStatusBarComponent,
+            },
+            {
+              statusPanel: ClickableStatusBarComponentDelete, align: 'right'
+            },
 
-
-          {
-            statusPanel: ClickableStatusBarComponent,
-          },
-          
           ]
         }
 
@@ -113,10 +120,6 @@ export default class BoardUser extends Component {
         }
       }
     );
-
-
-
-
   }
 
   retrieveUserBasket() {
@@ -144,25 +147,20 @@ export default class BoardUser extends Component {
   render() {
 
     const { userBaskets, currentUser, rowData, columnDefs, statusBar } = this.state;
-//    console.log("999999999", statusBar);
+    //    console.log("999999999", statusBar);
 
     return (
       <div className="container">
         <header className="jumbotron">
-          <h3>{this.state.content}</h3>
+
+          <img
+
+            src={logo}
+          />
+
+
+          <h3>User shopping cart</h3>
         </header>
-
-        <div>
-          {userBaskets &&
-            userBaskets.map((userBaskets, index) => (
-              <Container>
-                <img src={userBaskets.goods.img} className="img1" alt={"*"} />
-                <h5> {userBaskets.goods.title}  {userBaskets.quantity} </h5>
-              </Container>
-            ))}
-        </div>
-
-
 
         <div className="ag-theme-alpine" style={{ width: 900, height: 300 }} >
           < AgGridReact rowHeight={'35'} statusBar={statusBar} rowSelection='multiple'
@@ -170,9 +168,6 @@ export default class BoardUser extends Component {
             columnDefs={columnDefs}
           />
         </div>
-
-
-
       </div >
     );
   }

@@ -1,0 +1,147 @@
+ .div1-ts {
+  /* position: absolute; */
+  left: 0;
+  /* width: 800px; */
+  max-width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+ 
+  /* flex-direction: column; */
+  flex-grow:0;
+  /* background-color: #26d83b; */
+}
+ 
+
+
+.div2-ts {
+  width: 18%; 
+  margin: 5px;
+  background-color: #edf0f6;
+  
+  
+}
+
+.div2active-ts {
+  margin: 5px;
+  background-color: #1b5ee3;
+  color: white;
+  width: 18%;
+  
+ 
+}
+
+.div3-ts {
+  /* position: relative;
+  left: -5%; */
+  /* display: inline-block; */
+  display:flex;
+  left: 5%;
+  top: 0;
+  margin: 5px;
+  background-color: #26d83b;
+  
+}
+
+
+.div4-ts {
+  position: absolute;
+  right: 0;
+  display: inline-block;
+  width: 32%; 
+  /* right: 0%;  */
+  /* position: fixed; */
+  right:0%;
+  width: 33%;
+  
+  /* top: 70px; */
+  display: inline-block;
+  margin: 5px;
+  background-color:  #edf0f6;
+}
+
+.img1-ts {
+   width:80px;
+  height: 80px;
+  /* width: 100px;
+  height: 100px; 
+  width: 90%;*/
+  margin-left: 5%;
+  height: 80px;
+ 
+  margin-top: 5%;
+}
+
+.img2-ts {
+  /* width:180px;
+  height: 180px; */
+  padding-top: 20px;
+  width: 220px;
+  height: 220px;
+  /* width: 100%; */
+}
+
+/* #headerGoods {
+  text-align: center;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: rgb(8, 189, 29);
+  }  */
+
+.title-ts {
+  text-align: center;
+  font-family:'Times New Roman', Times, serif;
+  font-weight: bold;
+  color:  #26d83b;
+  font-size: 25px;
+  padding: 10px;
+  } 
+
+.name-ts {
+  font-family:'Times New Roman', Times, serif;
+  font-size: 15px;
+  padding: 5px;
+}
+
+
+  .description-ts {
+    text-align: left;
+    font-family:'Times New Roman', Times, serif;
+    color: black;
+    font-size: 15px;
+   
+} 
+
+.descriptionName-ts {
+  font-size: 18px;
+  font-weight: bold;
+
+}
+
+  .list-ts {
+    text-align: left;
+    max-width: 750px;
+    margin: auto;
+  }
+  
+  .submit-form-ts {
+    max-width: 300px;
+    margin: auto;
+  }
+  
+  .edit-form-ts {
+    max-width: 300px;
+    margin: auto;
+  }
+
+  .edit-ts {
+    color: white;
+    text-decoration: none;
+    text-align: center;
+ 
+  }
+  
+  .edit:hover-ts {
+    color:white;
+  }
+
+   

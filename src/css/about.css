@@ -1,0 +1,47 @@
+.flex-container-ab {
+    display: flex;
+    flex-direction: row;
+    justify-content:space-evenly;
+    
+    margin-left: 10%;
+    
+}
+
+.photo-ab {
+/*     width: 80%; */
+width: 200px;
+height: 200px;
+}
+
+#header-ab {
+    font-size: 15px;
+/*     font-family: 'Times New Roman', Times, serif; */
+    text-align: center;
+    
+}
+
+.user-ab {
+    display: block;
+    text-align: center;
+}
+
+.Name-ab {
+   font-style: italic; 
+   margin: auto;
+   font-size: 15px;
+   
+}
+.organization-ab {
+    text-decoration: none;
+    color: blue;
+}
+
+#skills-ab{
+    font-weight: bold;
+    
+}
+.p-ab{
+    text-indent: 30px;
+    font-size: 15px;
+    margin-left: 50px;
+}

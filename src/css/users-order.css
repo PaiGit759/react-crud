@@ -1,48 +1,72 @@
   
-  .submit-form {
-    max-width: 400px;
+  .submit-form-uo {
+    max-width: 500px;
    text-align: center;
     margin: auto;
     background-color : azure;
   }
   
-  .edit-form {
-    max-width: 600px;
+  .edit-form-uo {
+    max-width: 500px;
     margin: auto;
   }
 
-  .div13 {
+  .div3-uo {
     position: relative;
-    max-width: 400px;
+    max-width: 500px;
     left: 0%;
     top: 0;
     
   }
 
-  .div16 {
+  .div31-uo {
     position: relative;
-    max-width: 400px;
+  
+    
+  }
+
+
+
+  .div4-uo {
+    position: absolute;
+    right: 0;
+    display: inline-block;
+    width: 240px;
+    margin: 5px;
+    padding: 5px;
+    background-color:  #edf0f6;
+  }
+
+  .div5-uo {
+    position: absolute;
+    left: 0;
+    display: inline-block;
+    width: 240px;
+    margin: 5px;
+    padding: 5px;
+    background-color:  #edf0f6;
+  }
+
+  .div6-uo {
+    position: relative;
+    max-width: 500px;
     left: 0%;
     top: 70px;
     
   }
-
-  .div14 {
-    position: absolute;
-    right: 0;
-    display: inline-block;
-    width: 180px;
-    margin: 5px;
-    padding: 5px;
-    background-color:  #edf0f6;
-  }
-
-  .div15 {
-    position: absolute;
+ 
+  .div7-uo {
+      position: absolute;
     left: 0;
     display: inline-block;
-    width: 180px;
+    width: 490px;
     margin: 5px;
-    padding: 5px;
+    padding: 5px; 
     background-color:  #edf0f6;
+    
+  } 
+
+  .btn-uo {
+   margin: 5px;
+    
   }

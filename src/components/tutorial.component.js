@@ -45,13 +45,12 @@ class Tutorial extends Component {
   }
 
   componentDidMount() {
-    console.log('!!!!!',this.props.router.params);
+  //  console.log('!!!!!',this.props.router.params);
     this.getTutorial(this.props.router.params.id);
   }
 
   onChangeTitle(e) {
     const title = e.target.value;
-
     this.setState(function (prevState) {
       return {
         currentTutorial: {
@@ -162,7 +161,7 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
   deleteTutorial() {
     TutorialDataService.delete(this.state.currentTutorial.id)
       .then((response) => {
-        console.log(response.data);
+//        console.log(response.data);
         this.props.router.navigate("/tutorials");
       })
       .catch((e) => {
