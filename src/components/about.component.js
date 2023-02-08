@@ -2,12 +2,15 @@ import React, { Component } from "react";
 import UserService from "../services/user.service";
 
 
+ import UncontrolledExample from "./Carouselgoods";  
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import TutorialDataService from "../services/tutorial.service";
-import { Link } from "react-router-dom";
+
+//import TutorialDataService from "../services/tutorial.service";
+//import { Link } from "react-router-dom";
 
 //import "./tutorials.css";
 import "../css/about.css";
@@ -61,7 +64,7 @@ export default class About extends Component {
     
 <div>
   
-    <p id="header-ab">Our team - graduates of the course Front-end of the organization <a href="https://framtidstaget.se/ukraine" className="organization" target={'_blank'}> Föreningen Framtidståget</a> under the guidance of Mikhail Vlasov: </p>
+    <p id="header-ab">Our team - graduates of the course Front-end of the organization <a href="https://framtidstaget.se/ukraine" className="organization-ab" target={'_blank'}> Föreningen Framtidståget</a> under the guidance of Mikhail Vlasov: </p>
       <div className="flex-container-ab">
         <div className="user-ab">
           <img src={anatolii} className="photo-ab" />
@@ -80,7 +83,11 @@ export default class About extends Component {
 
     </Col>
     </Row>
+
+    {/* <UncontrolledExample/>  */}
+
     </Container>
-    );
-}
+ );
+    
+} 
 }

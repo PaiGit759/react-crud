@@ -8,7 +8,7 @@ import ClickableStatusBarComponentDelete from '../components/clickableStatusBarC
 
 import userBasketDataService from "../services/user.basket.service";
 import AuthService from "../services/auth.service";
-import Container from "react-bootstrap/esm/Container";
+//import Container from "react-bootstrap/esm/Container";
 
 
 
@@ -26,7 +26,7 @@ import logo from '../IMG/basket.jpeg'//"./public/basket.jpeg"; react-crud/public
 export default class BoardUser extends Component {
   constructor(props) {
     super(props);
-
+  
     this.retrieveUserBasket = this.retrieveUserBasket.bind(this);
 
     this.state = {
@@ -103,7 +103,6 @@ export default class BoardUser extends Component {
         }
         );
         //                console.log('!!!!!',rowData);
-
       },
       error => {
         this.setState({
@@ -135,7 +134,6 @@ export default class BoardUser extends Component {
             rowData: [...response.data]
           });
           //         console.log("77777",response.data);
-          //           console.log("99999",rowData);
         })
         .catch((e) => {
           console.log(e);

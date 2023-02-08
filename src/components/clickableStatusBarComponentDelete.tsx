@@ -6,24 +6,37 @@ import { GroupCellRenderer, IStatusPanelParams } from 'ag-grid-community';
 import UserBasketDataService from "../services/user.basket.service";
 import { withRouter } from "../common/with-router";
 
-export default (props: IStatusPanelParams) => {
+import BoardUser from "./board-user.component";
 
-  const [useData] = useState('');
+import { useParams, Link } from "react-router-dom";
+
+export default (props: IStatusPanelParams) => {
 
   const onClick = () => {
     let userBasket = props.api.getSelectedRows();
-    alert('BBBBB');
-    
-    const arrayId = userBasket.map((elem) => {
+
+//    console.log('+++++',props.api)
+
+    const result = window.confirm('Are you sure you want to delete the selected?');
+  //  alert(isAdmin);
+  
+  if (result)
+{
+  const arrayId = userBasket.map((elem) => {
       let vvv = { id: elem._id}
       return vvv;
     });
 
-  //  console.log('BBBBB',arrayId);
+ arrayId.forEach(element => {
+  UserBasketDataService.delete(element.id);
+}); 
 
-  UserBasketDataService.delete(arrayId[0].id);
+window.location.reload()
 
-    return '';
+}
+
+//    return '';
+
   };
 
   const style = {
@@ -36,14 +49,14 @@ export default (props: IStatusPanelParams) => {
 
   return (
     <div>
-  
+
         <input
           style={style}
           type="button"
           onClick={onClick}
           value="Delete Selected"
         />
-      
+  
     </div>
   );
 };
