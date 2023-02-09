@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import TutorialDataService from "../services/tutorial.service";
 import { withRouter } from "../common/with-router";
 
-//import "../css/tutorials.css"; //tutorials.css
+import "../css/tutorials.css"; //tutorials.css
+import Button from 'react-bootstrap/Button';
 
 class Tutorial extends Component {
   constructor(props) {
@@ -112,7 +113,6 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
         this.setState({
           currentTutorial: response.data,
         });
-        //        console.log(response.data);
       })
       .catch((e) => {
         console.log(e);
@@ -148,7 +148,6 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
       this.state.currentTutorial
     )
       .then((response) => {
-        //        console.log(response.data);
         this.setState({
           message: "The tutorial was updated successfully!",
         });
@@ -161,7 +160,6 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
   deleteTutorial() {
     TutorialDataService.delete(this.state.currentTutorial.id)
       .then((response) => {
-//        console.log(response.data);
         this.props.router.navigate("/tutorials");
       })
       .catch((e) => {
@@ -228,7 +226,7 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
             <img src={`${currentTutorial.img}`} className="img2" alt={"*"} />
 
             <div className="form-group">
-              <label htmlFor="file">file</label>
+              <label htmlFor="file">File</label>
               <input
                 type="file"
                 className="form-control"
@@ -238,23 +236,26 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
               />
             </div>
 
-
+{/* 
               <div className="form-group">
                 <label>
                   <strong>Status:</strong>
                 </label>
                 {currentTutorial.published ? "Published" : "Pending"}
               </div>
+ */}
+
             </form>
 
-            {currentTutorial.published ? (
-              <button
+           {/*  {currentTutorial.published ? (
+              <Button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(false)}
               >
                 UnPublish
-              </button>
+              </Button>
             ) : (
+
               <button
                 className="badge badge-primary mr-2"
                 onClick={() => this.updatePublished(true)}
@@ -262,21 +263,22 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
                 Publish
               </button>
             )}
-
-            <button
-              className="badge badge-danger mr-2"
+            
+ */}
+            <Button
+            className="button-t"  
               onClick={this.deleteTutorial}
             >
               Delete
-            </button>
+            </Button>
 
-            <button
+            <Button
               type="submit"
-              className="badge badge-success"
+              className="button-t"
               onClick={this.updateTutorial}
             >
               Update
-            </button>
+            </Button>
             <p>{this.state.message}</p>
           </div>
         ) : (
@@ -291,3 +293,5 @@ this.readFileAsDataURL(e.target.files[0]).then(img => {
 }
 
 export default withRouter(Tutorial);
+
+

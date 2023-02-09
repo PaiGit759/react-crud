@@ -8,18 +8,15 @@ import ClickableStatusBarComponentDelete from '../components/clickableStatusBarC
 
 import userBasketDataService from "../services/user.basket.service";
 import AuthService from "../services/auth.service";
-//import Container from "react-bootstrap/esm/Container";
 
-
-
-import { AgGridColumn, AgGridReact } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 
 import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-alpine.css';
 
 import 'ag-grid-enterprise';
 
-import logo from '../IMG/basket.jpeg'//"./public/basket.jpeg"; react-crud/public/basket.jpeg
+import logo from '../IMG/basket.jpeg';
 
 
 
@@ -166,6 +163,7 @@ export default class BoardUser extends Component {
             columnDefs={columnDefs}
           />
         </div>
+        
       </div >
     );
   }

@@ -13,7 +13,7 @@ import AuthService from "./services/auth.service";
 
 import Login from "./components/login.component";
 import Register from "./components/register.component";
-import Home from "./components/home.component";
+//import Home from "./components/home.component";
 import Profile from "./components/profile.component";
 import BoardUser from "./components/board-user.component";
 import BoardModerator from "./components/board-moderator.component";
@@ -118,7 +118,7 @@ class App extends Component {
             <div className="navbar-nav ml-auto">
               <li className="nav-item">
                 <Link to={"/profile"} className="nav-link">
-                  {currentUser.username}
+                Orders({currentUser.username})
                 </Link>
               </li>
               <li className="nav-item">

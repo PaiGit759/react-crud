@@ -11,10 +11,10 @@ class UserOrderDataService {
 
 
 
-//  get(id) {
+  get(id) {
 //          console.log(`+++++${id}`);
-//   return http.get(`/userorders/${id}`);
-//  }
+   return http.get(`/userorders/${id}`);
+  }
 
   create(data) {
 //      console.log("*****&&&&&", data);

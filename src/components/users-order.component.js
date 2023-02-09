@@ -1,8 +1,12 @@
 import React, { Component } from "react";
 import UserOrderDataService from "../services/user.order.service";
 import { withRouter } from "../common/with-router";
+import { Link } from "react-router-dom";
 
 import AuthService from "../services/auth.service";
+
+import UserBasketDataService from "../services/user.basket.service";
+import Button from 'react-bootstrap/Button';
 
 import "../css/users-order.css";
 
@@ -41,18 +45,7 @@ class UsersOrder extends Component {
     };
   }
 
-  /* 
-    async readFileAsDataURL(file) {
-      let result_base64 = await new Promise((resolve) => {
-        let fileReader = new FileReader();
-        fileReader.onload = (e) => resolve(fileReader.result);
-        fileReader.readAsDataURL(file);
-      });
-      return result_base64;
-    }
-   */
   componentDidMount() {
-
 
     const prstr = localStorage.getItem('useData');
     const obj = JSON.parse(prstr);
@@ -61,9 +54,11 @@ class UsersOrder extends Component {
     const rowData = obj.map((elem) => {
       let xxx = Math.round(elem.quantity * elem.goods.price * (1 - elem.goods.discount / 100));
       itsum += xxx;
-      let vvv = { id: elem.goods.id, title: elem.goods.title, amount: xxx, quantity: elem.quantity }
+      let vvv = { id: elem.goods.id, title: elem.goods.title, amount: xxx, quantity: elem.quantity, idb: elem._id }
       return vvv;
     });
+
+    //console.log('£££££',rowData)
 
     const user = AuthService.getCurrentUser();
 
@@ -78,6 +73,7 @@ class UsersOrder extends Component {
             { headerName: 'Quantity', wrapHeaderText: true, field: 'quantity', type: 'numericColumn', width: 120, maxWidth: 120, resizable: true },
             { headerName: 'Amount payable', wrapHeaderText: true, field: 'amount', type: 'numericColumn', width: 160, maxWidth: 200, resizable: true },
             { headerName: 'Id', field: 'id', hide: true },
+            { headerName: 'Id', field: 'idb', hide: true },
           ],
         rowData: rowData,
         totalAmount: itsum,
@@ -115,10 +111,10 @@ class UsersOrder extends Component {
       adress: e.target.value,
     });
   }
- 
+
   saveOrder(e) {
     e.preventDefault();
-//    alert('£££££')
+    //    alert('£££££')
     //console.log('£££££')
 
     var data = {
@@ -127,25 +123,46 @@ class UsersOrder extends Component {
       surname: this.state.surname,
       telephone: this.state.telephone,
       email: this.state.email,
-      totalAmount: this.state.totalAmount,
-
+      adress: this.state.adress,
+      totalamount: this.state.totalAmount,
 
       goods: this.state.rowData,
     };
 
+    console.log('FFFFF', this.state.rowData);
+
     UserOrderDataService.create(data)
       .then((response) => {
+        alert('The order has been successfully added to the database');
       })
       .catch((e) => {
         console.log(e);
       });
 
 
+    const arrayId = this.state.rowData.map((elem) => {
+      let vvv = { _idb: elem.idb }
+      return vvv;
+    });
+    // console.log('ZZZZZ9',arrayId); 
+
+    arrayId.forEach(element => {
+      //   console.log('ZZZZZ9',element._idb); 
+
+      UserBasketDataService.delete(element._idb);
+    });
   }
 
   render() {
 
-    const { rowData, columnDefs , totalAmount} = this.state;
+    const { rowData, columnDefs, totalAmount } = this.state;
+
+    const style = {
+    margin : '10px',
+    color: 'black',
+      background: 'lightgreen',
+      fontSize: '20px',
+    };
 
     return (
 
@@ -224,7 +241,7 @@ class UsersOrder extends Component {
                   onChange={this.onChangeAdress}
                   name="adress"
                 />
-              <h4> Ordered goods for the total amount = {totalAmount} SEK</h4>
+                <h4> Ordered goods for the total amount = {totalAmount} SEK</h4>
                 <div className="ag-theme-alpine" style={{ width: 480, height: 280 }} >
 
                   < AgGridReact rowHeight={'35'}
@@ -233,9 +250,18 @@ class UsersOrder extends Component {
                   />
                 </div>
 
-                <button onClick={this.saveOrder} className="btn btn-success btn-uo ">
-                Checkout and pay
-                </button>
+
+
+                <Button onClick={this.saveOrder} color="black" style={style}>
+
+                  <Link
+                    to={"/profile"}
+                    className="badge badge-warning"
+                  >
+                    Checkout and pay
+
+                  </Link>
+                </Button>
 
               </div>
 

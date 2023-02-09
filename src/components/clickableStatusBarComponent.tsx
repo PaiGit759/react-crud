@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { GroupCellRenderer, IStatusPanelParams } from 'ag-grid-community';
 
-import { useParams, Link } from "react-router-dom";
-
+//import { useParams, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 export default (props: IStatusPanelParams) => {
 
-  const [useData] = useState('');
+//  const [useData] = useState('');
 
   const onClick = () => {
 

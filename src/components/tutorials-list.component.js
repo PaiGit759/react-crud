@@ -141,7 +141,6 @@ export default class TutorialsList extends Component {
     });
   }
 
-
   saveUserBasket(event) {
     event.preventDefault();
 
@@ -157,7 +156,9 @@ export default class TutorialsList extends Component {
       .catch((e) => {
         console.log(e);
       });
-  }
+  
+  alert(`goods ${this.state.currentTutorial.title} added to Basket`)
+    }
 
   render() {
     const { searchTitle, tutorials, currentTutorial, currentIndex, currentUser, showAdminBoard } =
@@ -167,7 +168,6 @@ export default class TutorialsList extends Component {
       <Container fluid>
 
         <Row>
-
 
           <Col xs={6} sm={7} lg={8}>
             <div className="div3-ts">
@@ -194,32 +194,19 @@ export default class TutorialsList extends Component {
             </div>
           </Col>
 
-
-
           <Col xs={6} sm={5} lg={4}>
             < div className="div4-ts">
               {currentTutorial ? (
                 <Container>
 
-                  {/* 
-                  <Row>
-                    <Col xs={12}>
-                      <h2 id="headerGoods">Goods</h2>
-                    </Col>
-                  </Row>
-
- */}
                   <Row>
                     <Col xs={12}>
                       <div className="title-ts">
                         {" "}
                         {currentTutorial.title}
                       </div>
-                      {/*  <h2 id="headerGoods">Goods</h2>  */}
                     </Col>
                   </Row>
-
-
 
                   <Row>
 
@@ -228,25 +215,6 @@ export default class TutorialsList extends Component {
                     </Col>
 
                     <Col >
-
-                      {/* 
-                      <div>
-                        <label>
-                          <strong>Title:</strong>
-                        </label>{" "}
-                        {currentTutorial.title}
-                      </div>
- */}
-
-                      {/* 
-                      <div>
-                        <label>
-                          <strong>Description:</strong>
-                        </label>{" "}
-                        {currentTutorial.description}
-                      </div>
-
- */}
 
                       <div className="description-ts">
                         <label>
@@ -275,14 +243,6 @@ export default class TutorialsList extends Component {
                     </Col>
 
                     {showAdminBoard ? (
-                      /* 
-                                            <Link
-                                              to={"/tutorials/" + currentTutorial.id}
-                                              className="badge badge-warning"
-                                            >
-                                              Edit
-                                            </Link>
-                       */
 
                       <Button variant="primary">
                         <Link
@@ -318,15 +278,13 @@ export default class TutorialsList extends Component {
                           Add to Basket
                         </Button>
 
-
                         <Link
                           to={"/user/"}
                           className="badge badge-warning"
                         >
-                        {/*   Go to Basket */}
                           <Button>
-                          Go to Basket
-                        </Button>
+                            Go to Basket
+                          </Button>
 
                         </Link>
                       </div>

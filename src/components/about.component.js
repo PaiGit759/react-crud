@@ -84,7 +84,7 @@ export default class About extends Component {
     </Col>
     </Row>
 
-    {/* <UncontrolledExample/>  */}
+     <UncontrolledExample/> 
 
     </Container>
  );

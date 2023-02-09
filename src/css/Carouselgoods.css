@@ -1,0 +1,15 @@
+#music-equipment, #equipment {
+    color:blue;
+}
+
+p {
+    font-size: 15px;
+}
+
+.ContainerCarousel {
+    margin: auto;
+    left: 37%;
+    text-align: center;
+    width: 25%;
+    height: 25%;
+}
